@@ -1,0 +1,40 @@
+# The Query type represents all of the entry points into the API.
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+type Query {
+    Websites(first: Int!): [Website]!
+    FetchFollows(Token: String) : [Website]!
+    FetchUser(Token: String) : User
+}
+
+type Mutation {
+    ReportSite(input: WebsiteInput) : Boolean
+    CreateUser(user: CreateUserInput) : User
+    LoginUser(Name: String, password: String) : User
+}
+
+type Website {
+    ID: ID
+    Url: String
+    Description: String
+    Image: String
+    Counter: Int
+}
+
+input CreateUserInput {
+    Name: String
+    PassWord: String
+}
+
+
+input WebsiteInput {
+    Url: String
+}
+
+type User {
+    Token: String
+    Hugs:  [Website]!
+}
